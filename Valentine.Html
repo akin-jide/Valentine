@@ -23,94 +23,6 @@ body {
   overflow: hidden;
 }
 
-/* Envelope Styles */
-.envelope-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, #ff6b9d 0%, #ffd89b 50%, #ff9a8b 100%);
-  z-index: 1000;
-  animation: fadeInEnvelope 0.6s ease-out;
-}
-
-@keyframes fadeInEnvelope {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.envelope {
-  position: relative;
-  width: 300px;
-  height: 200px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.envelope:hover {
-  transform: scale(1.05);
-}
-
-.envelope-flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: linear-gradient(135deg, #ff3366, #ff6b9d);
-  border-radius: 10px 10px 0 0;
-  transform-origin: top center;
-  transition: transform 0.8s ease;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  color: white;
-  font-size: 2em;
-  padding-bottom: 10px;
-}
-
-.envelope.opened .envelope-flap {
-  transform: rotateX(180deg);
-}
-
-.envelope-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.8s ease 0.4s;
-}
-
-.envelope.opened .envelope-content {
-  opacity: 1;
-}
-
-.envelope-text {
-  font-size: 1.2em;
-  color: #ff3366;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.envelope-hint {
-  font-size: 0.9em;
-  color: #999;
-}
-
 .hidden {
   display: none !important;
 }
@@ -334,17 +246,6 @@ const questions = [
   "😒"
 ];
 
-function openEnvelope() {
-  const envelope = document.getElementById('envelope');
-  const envelopeContainer = document.getElementById('envelopeContainer');
-  
-  envelope.classList.add('opened');
-  
-  setTimeout(() => {
-    envelopeContainer.classList.add('hidden');
-    document.getElementById('card').classList.remove('hidden');
-  }, 1200);
-}
 
 function sayNo() {
   noCount++;
@@ -378,3 +279,4 @@ function sayYes() {
 
   document.getElementById("card").innerHTML = `
     <div class=\
+
