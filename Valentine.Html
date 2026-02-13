@@ -1,85 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Will You Be My Valentine?</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #ffe6eb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💘</title>
 
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      max-width: 400px;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    h1 {
-      color: #ff4d6d;
-    }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ff6b9d 0%, #ffd89b 50%, #ff9a8b 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  overflow: hidden;
+}
 
-    img {
-      width: 200px;
-      margin: 20px 0;
-    }
+/* Envelope Styles */
+.envelope-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #ff6b9d 0%, #ffd89b 50%, #ff9a8b 100%);
+  z-index: 1000;
+  animation: fadeInEnvelope 0.6s ease-out;
+}
 
-    button {
-      font-size: 18px;
-      padding: 10px 25px;
-      margin: 10px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-    }
+@keyframes fadeInEnvelope {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
-    #yesBtn {
-      background: #ff4d6d;
-      color: white;
-    }
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
 
-    #noBtn {
-      background: #ccc;
-    }
-  </style>
+.envelope:hover {
+  transform: scale(1.05);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(135deg, #ff3366, #ff6b9d);
+  border-radius: 10px 10px 0 0;
+  transform-origin: top center;
+  transition: transform 0.8s ease;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  color: white;
+  font-size: 2em;
+  padding-bottom: 10px;
+}
+
+.envelope.opened .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.8s ease 0.4s;
+}
+
+.envelope.opened .envelope-content {
+  opacity: 1;
+}
+
+.envelope-text {
+  font-size: 1.2em;
+  color: #ff3366;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.envelope-hint {
+  font-size: 0.9em;
+  color: #999;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 35px 30px;
+  border-radius: 30px;
+  box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
+  text-align: center;
+  max-width: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  color: #ff3366;
+  font-size: 2.2em;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1em;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+img {
+  width: 180px;
+  height: 180px;
+  margin: 15px 0;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#yesBtn {
+  background: linear-gradient(135deg, #ff3366, #ff6b9d);
+  color: white;
+  padding: 12px 40px;
+  font-size: 18px;
+}
+
+#yesBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 51, 102, 0.4);
+}
+
+#yesBtn:active {
+  transform: translateY(-1px);
+}
+
+#noBtn {
+  background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+  color: #333;
+}
+
+#noBtn:hover {
+  background: linear-gradient(135deg, #d0d0d0, #e5e5e5);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+#noBtn:active {
+  transform: translateY(-1px);
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: red;
+  animation: fall 3s linear forwards;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.heart-confetti {
+  position: fixed;
+  font-size: 30px;
+  animation: fallHeart 3s linear forwards;
+  pointer-events: auto;
+  cursor: pointer;
+  user-select: none;
+}
+
+@keyframes fallHeart {
+  from {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.celebration-text {
+  font-size: 2em;
+  color: #ff3366;
+  font-weight: 700;
+  margin-bottom: 15px;
+  animation: bounce 0.8s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.celebration-message {
+  font-size: 1.2em;
+  color: #333;
+  margin-top: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="container" id="card">
-    <h1>Will you be my Valentine? 💖</h1>
-    <img id="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" />
-    <div>
-      <button id="yesBtn" onclick="sayYes()">Yes 💕</button>
-      <button id="noBtn" onclick="sayNo()">No 😢</button>
+<audio id="celebrateSound">
+  <source src="https://www.soundjay.com/human/applause-8.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Envelope Animation -->
+<div class="envelope-container" id="envelopeContainer">
+  <div class="envelope" id="envelope" onclick="openEnvelope()">
+    <div class="envelope-flap">💌</div>
+    <div class="envelope-content">
+      <div class="envelope-text">Click to open</div>
+      <div class="envelope-hint">A special message for you</div>
     </div>
   </div>
+</div>
 
-  <script>
-    let yesSize = 18;
+<!-- Main Valentine Card -->
+<div class="container hidden" id="card">
+  <h1 id="question">Will you be my Valentine? 💖</h1>
+  <p class="subtitle">Jess, I really like you 💕</p>
+  <img id="gif" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXExMzJveTk5Y2tlemMwdXhwOTFsMzR5MzNnN3FubG56M290MGQ4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/96DeW8wUdpN96/giphy.gif" alt="Valentine proposal">
+  <div class="button-container">
+    <button id="yesBtn" onclick="sayYes()">Yes 💕</button>
+    <button id="noBtn" onclick="sayNo()">No 😢</button>
+  </div>
+</div>
 
-    function sayNo() {
-      yesSize += 6;
-      document.getElementById("yesBtn").style.fontSize = yesSize + "px";
-      document.getElementById("noBtn").innerText = "Are you sure? 😳";
-    }
+<script>
+let yesSize = 18;
+let noCount = 0;
+const MAX_NO_CLICKS = 3;
 
-    function sayYes() {
-      document.getElementById("card").innerHTML = `
-        <h1>YAY!!! 🎉💖</h1>
-        <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" />
-        <p style="font-size:20px; margin-top:15px;">
-          I knew you'd say yes 😌💕
-        </p>
-      `;
-    }
-  </script>
+const sadGifs = [
+  "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif",
+  "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnNuZWd6dWE0M2E5MnJodGpxOGVhM2g4dmg1bHNkMjg2bTlwbTZjOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ylyUQlf4VUVF9odXKU/giphy.gif",
+  "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHU1dnQwdnlleHZyaWFwamxmZ2s4Mm1xd2E5cTBpNHA2ZDV6eXQyYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AAsj7jdrHjtp6/giphy.gif"
+];
 
-</body>
-</html>
+const questions = [
+  "Are you really really sure? 🥺",
+  "Like… be gudied babe, let's try again 😒",
+  "Try again, Make i no bite you 😒",
+  "Ahn Ahn, you dey whyne?? 😢",
+  "😒"
+];
+
+function openEnvelope() {
+  const envelope = document.getElementById('envelope');
+  const envelopeContainer = document.getElementById('envelopeContainer');
+  
+  envelope.classList.add('opened');
+  
+  setTimeout(() => {
+    envelopeContainer.classList.add('hidden');
+    document.getElementById('card').classList.remove('hidden');
+  }, 1200);
+}
+
+function sayNo() {
+  noCount++;
+  
+  if (noCount >= MAX_NO_CLICKS) {
+    document.getElementById('yesBtn').style.width = '100vw';
+    document.getElementById('yesBtn').style.height = '100vh';
+    document.getElementById('yesBtn').style.position = 'fixed';
+    document.getElementById('yesBtn').style.top = '0';
+    document.getElementById('yesBtn').style.left = '0';
+    document.getElementById('yesBtn').style.zIndex = '998';
+    document.getElementById('yesBtn').style.borderRadius = '0';
+    document.getElementById('yesBtn').style.fontSize = '60px';
+    document.getElementById('card').style.position = 'relative';
+    document.getElementById('card').style.zIndex = '999';
+    return;
+  }
+
+  yesSize += 30;
+  document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+
+  document.getElementById("gif").src = sadGifs[Math.min(noCount - 1, sadGifs.length - 1)];
+
+  document.getElementById("question").innerText = questions[Math.min(noCount, questions.length - 1)];
+
+  document.getElementById("noBtn").innerText = "Are you sure? 😳";
+}
+
+function sayYes() {
+  document.getElementById("celebrateSound").play();
+
+  document.getElementById("card").innerHTML = `
+    <div class=\
