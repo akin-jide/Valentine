@@ -1,6 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <title>Will You Be My Valentine?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffe6eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+
+    h1 {
+      color: #ff4d6d;
+    }
+
+    img {
+      width: 200px;
+      margin: 20px 0;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 10px 25px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background: #ccc;
+    }
+  </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Be My Valentine 💘</title>
@@ -23,20 +71,14 @@ body {
   overflow: hidden;
 }
 
-.hidden {
-  display: none !important;
-}
-
 .container {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  padding: 35px 30px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 50px 40px;
   border-radius: 30px;
   box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
   text-align: center;
   max-width: 500px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   animation: slideIn 0.6s ease-out;
 }
 
@@ -53,8 +95,8 @@ body {
 
 h1 {
   color: #ff3366;
-  font-size: 2.2em;
-  margin-bottom: 12px;
+  font-size: 2.5em;
+  margin-bottom: 20px;
   font-weight: 700;
   letter-spacing: -0.5px;
   line-height: 1.2;
@@ -62,19 +104,18 @@ h1 {
 
 .subtitle {
   color: #666;
-  font-size: 1em;
-  margin-bottom: 20px;
+  font-size: 1.1em;
+  margin-bottom: 30px;
   font-weight: 300;
 }
 
 img {
-  width: 180px;
-  height: 180px;
-  margin: 15px 0;
+  width: 240px;
+  height: 240px;
+  margin: 25px 0;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
   transition: transform 0.3s ease;
-  object-fit: cover;
 }
 
 img:hover {
@@ -84,14 +125,14 @@ img:hover {
 .button-container {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 15px;
+  margin-top: 35px;
   flex-wrap: wrap;
 }
 
 button {
-  padding: 12px 28px;
-  font-size: 16px;
+  padding: 15px 35px;
+  font-size: 18px;
   border-radius: 25px;
   border: none;
   cursor: pointer;
@@ -103,8 +144,8 @@ button {
 #yesBtn {
   background: linear-gradient(135deg, #ff3366, #ff6b9d);
   color: white;
-  padding: 12px 40px;
-  font-size: 18px;
+  padding: 15px 50px;
+  font-size: 20px;
 }
 
 #yesBtn:hover {
@@ -137,8 +178,7 @@ button {
   height: 10px;
   background: red;
   animation: fall 3s linear forwards;
-  pointer-events: auto;
-  cursor: pointer;
+  pointer-events: none;
 }
 
 @keyframes fall {
@@ -152,31 +192,11 @@ button {
   }
 }
 
-.heart-confetti {
-  position: fixed;
-  font-size: 30px;
-  animation: fallHeart 3s linear forwards;
-  pointer-events: auto;
-  cursor: pointer;
-  user-select: none;
-}
-
-@keyframes fallHeart {
-  from {
-    transform: translateY(-10vh) rotate(0deg);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
 .celebration-text {
-  font-size: 2em;
+  font-size: 2.2em;
   color: #ff3366;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   animation: bounce 0.8s ease-in-out infinite;
 }
 
@@ -190,9 +210,9 @@ button {
 }
 
 .celebration-message {
-  font-size: 1.2em;
+  font-size: 1.3em;
   color: #333;
-  margin-top: 15px;
+  margin-top: 20px;
   font-weight: 500;
   line-height: 1.6;
 }
@@ -201,36 +221,30 @@ button {
 
 <body>
 
+  <div class="container" id="card">
+    <h1>Will you be my Valentine? 💖</h1>
+    <img id="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" />
+    <div>
+      <button id="yesBtn" onclick="sayYes()">Yes 💕</button>
+      <button id="noBtn" onclick="sayNo()">No 😢</button>
+    </div>
 <audio id="celebrateSound">
   <source src="https://www.soundjay.com/human/applause-8.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Envelope Animation -->
-<div class="envelope-container" id="envelopeContainer">
-  <div class="envelope" id="envelope" onclick="openEnvelope()">
-    <div class="envelope-flap">💌</div>
-    <div class="envelope-content">
-      <div class="envelope-text">Click to open</div>
-      <div class="envelope-hint">A special message for you</div>
-    </div>
-  </div>
-</div>
-
-<!-- Main Valentine Card -->
-<div class="container hidden" id="card">
+<div class="container" id="card">
   <h1 id="question">Will you be my Valentine? 💖</h1>
   <p class="subtitle">Jess, I really like you 💕</p>
   <img id="gif" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXExMzJveTk5Y2tlemMwdXhwOTFsMzR5MzNnN3FubG56M290MGQ4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/96DeW8wUdpN96/giphy.gif" alt="Valentine proposal">
   <div class="button-container">
     <button id="yesBtn" onclick="sayYes()">Yes 💕</button>
     <button id="noBtn" onclick="sayNo()">No 😢</button>
-  </div>
+</div>
 </div>
 
 <script>
-let yesSize = 18;
+let yesSize = 20;
 let noCount = 0;
-const MAX_NO_CLICKS = 3;
 
 const sadGifs = [
   "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif",
@@ -246,30 +260,16 @@ const questions = [
   "😒"
 ];
 
-
 function sayNo() {
   noCount++;
-  
-  if (noCount >= MAX_NO_CLICKS) {
-    document.getElementById('yesBtn').style.width = '100vw';
-    document.getElementById('yesBtn').style.height = '100vh';
-    document.getElementById('yesBtn').style.position = 'fixed';
-    document.getElementById('yesBtn').style.top = '0';
-    document.getElementById('yesBtn').style.left = '0';
-    document.getElementById('yesBtn').style.zIndex = '998';
-    document.getElementById('yesBtn').style.borderRadius = '0';
-    document.getElementById('yesBtn').style.fontSize = '60px';
-    document.getElementById('card').style.position = 'relative';
-    document.getElementById('card').style.zIndex = '999';
-    return;
-  }
-
   yesSize += 30;
   document.getElementById("yesBtn").style.fontSize = yesSize + "px";
 
-  document.getElementById("gif").src = sadGifs[Math.min(noCount - 1, sadGifs.length - 1)];
+  document.getElementById("gif").src =
+    sadGifs[noCount % sadGifs.length];
 
-  document.getElementById("question").innerText = questions[Math.min(noCount, questions.length - 1)];
+  document.getElementById("question").innerText =
+    questions[noCount % questions.length];
 
   document.getElementById("noBtn").innerText = "Are you sure? 😳";
 }
@@ -278,5 +278,47 @@ function sayYes() {
   document.getElementById("celebrateSound").play();
 
   document.getElementById("card").innerHTML = `
-    <div class=\
+    <div class=\"celebration-text\">Good Girl!!! 🎉</div>
+    <img src=\"https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2ZidGsyMDF0N2dsdTEwZXppMm15Zm1sOXd1amlqcjlvOGFvZDZ1ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MJs7EYwHyG8XC/giphy.gif\" alt=\"Celebration\">\n    <p class=\"celebration-message\">
+      You were never escaping anyway 😌💘<br>
+      <span style=\"font-size: 0.9em; color: #ff6b9d;\">I'm so happy you said yes! 💕</span>
+    </p>
+  `;
 
+  startConfetti();
+}
+
+  <script>
+    let yesSize = 18;
+
+    function sayNo() {
+      yesSize += 6;
+      document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+      document.getElementById("noBtn").innerText = "Are you sure? 😳";
+    }
+
+    function sayYes() {
+      document.getElementById("card").innerHTML = `
+        <h1>YAY!!! 🎉💖</h1>
+        <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" />
+        <p style="font-size:20px; margin-top:15px;">
+          I knew you'd say yes 😌💕
+        </p>
+      `;
+    }
+  </script>
+function startConfetti() {
+  for (let i = 0; i < 80; i++) {
+    let confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.background =
+      ["#ff3366", "#ff66b2", "#ff99cc", "#ffd89b", "#ff9a8b"].Math.floor(Math.random()*5);
+    confetti.style.animationDuration = (Math.random()*2+2) + "s";
+    document.body.appendChild(confetti);
+  }
+} 
+</script>
+
+</body>
+</html>
